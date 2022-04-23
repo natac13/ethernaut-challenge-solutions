@@ -1,4 +1,5 @@
 import { ethers } from "hardhat";
+import { ETHERNAUT_ABI, ETHERNAUT_ADDRESS } from "./constants";
 
 const abi = [
   {
@@ -169,7 +170,7 @@ const abi = [
   },
 ];
 
-const CONTRACT_ADDRESS = "0x382BCA59aA55ac66fd11b321EA3F8C06Ac07ca64";
+const CONTRACT_ADDRESS = "0x427F81500245a7F70Df89b2e9ec30a1Af582B5B7";
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -180,6 +181,10 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
+  const ethernaut = await ethers.getContractAt(
+    ETHERNAUT_ABI,
+    ETHERNAUT_ADDRESS
+  );
   const contract = await ethers.getContractAt(abi, CONTRACT_ADDRESS);
 
   await contract.deployed();
@@ -194,6 +199,10 @@ async function main() {
   console.log(await contract.method7123949());
   console.log(await contract.password());
   console.log(await contract.authenticate(await contract.password()));
+
+  const tx = await ethernaut.submitLevelInstance(CONTRACT_ADDRESS);
+  const rc = await tx.wait();
+  console.log(rc);
 
   // const Greeter = await ethers.getContractFactory("Greeter");
   // const greeter = await Greeter.deploy("Hello, Hardhat!");
