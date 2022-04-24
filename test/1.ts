@@ -40,6 +40,25 @@ describe("Fallback", function () {
 
     expect(await contract.owner()).to.equal(solution.address);
 
-    // expect()
+    expect(
+      await (await ethers.provider.getBalance(contract.address)).toNumber()
+    ).to.be.greaterThanOrEqual(0);
+
+    expect(
+      (await ethers.provider.getBalance(solution.address)).toNumber()
+    ).to.be.greaterThanOrEqual(0.0002);
+
+    const tx = await solution.connect(owner).withdraw();
+    const rc = await tx.wait();
+    const event = rc?.events?.find((e) => e?.event === "ReceivedAmount");
+    const amount = event?.args?.[0]?.toNumber();
+    console.log(
+      "Amount Received: ",
+      `${ethers.utils.formatEther(amount)} ether`
+    );
+
+    expect(
+      await (await ethers.provider.getBalance(solution.address)).toNumber()
+    ).to.be.greaterThanOrEqual(0);
   });
 });
