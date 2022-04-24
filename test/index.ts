@@ -1,19 +1,21 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import { TestEvent } from "../typechain";
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("TestEvent", function () {
+  it("happy path", async function () {
+    const _amount = 3;
+    const Contract = await ethers.getContractFactory("TestEvent");
+    const contract = (await Contract.deploy()) as TestEvent;
+    await contract.deployed();
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    const tx = await contract.mint(_amount); // 100ms
+    const rc = await tx.wait(); // 0ms, as tx is already confirmed
+    const event = rc?.events?.find((event) => event.event === "TokensMinted");
+    const args = event?.args;
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    const amount = args?.[0].toNumber();
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    expect(amount).to.equal(_amount);
   });
 });
