@@ -110,3 +110,29 @@ hh run scripts/3.ts --network rinkeby
 ### Take Away 
 
 Generating random numbers in solidity is not really possible, unless you use an oracle like [Chainlink VRF](https://docs.chain.link/docs/get-a-random-number)
+
+## Level 4 Telephone
+
+This level will require the use of a smart contract once again. This time the `msg.sender` needs to be different than the `tx.origin` for the `changeOwner` function to complete the transfer
+
+### Solution 
+
+We need to create a contract which will call the `changeOwner` function and pass in the `msg.sender` as this will me / your address and the `tx.origin` will be equal to the solution contract's address.
+
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/4.ts --network rinkeby
+```
+
+[My Solution](https://rinkeby.etherscan.io/address/0x039d348543f5b839b5d020adbfd6f06a47cf24c2#code)
+
+
+### Take Away
+
+`msg.sender` and `tx.origin` can be different when the caller is a smart contract.
+
+> While this example may be simple, confusing tx.origin with msg.sender can lead to phishing-style attacks, such as [this](https://blog.ethereum.org/2016/06/24/security-alert-smart-contract-wallets-created-in-frontier-are-vulnerable-to-phishing-attacks/)
+
+This technique was used to mint more than the expected number of Adidas NFTs when it launched.
+A smart contract was created which made child smart contract which minted the max and transfer to the parent before self destructing.
