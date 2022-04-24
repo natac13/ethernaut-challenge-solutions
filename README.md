@@ -45,6 +45,12 @@ By creating a separate contract which will handle the taking ownership and withd
 
 First we need to contribute to the Fallback contract some amount less than 0.001 ether. As this is a requirement of the `receive()` function. Then we need to send some amount of ether to the Fallback function which will set the `msg.sender` to the new owner of the Fallback contract. At which point we can withdraw the funds and run! 🏃
 
+#### Contract Solution
+
+I created a contract that would complete the task, however does not pass ethernaut verification as the final owner address in then the Solution contract and not the address which lanuched the instance.
+
+https://rinkeby.etherscan.io/address/0xcfbfdf7e2b9fec2ef263eefc257b49abfe7b4949#code
+
 Run
 
 ```sh
