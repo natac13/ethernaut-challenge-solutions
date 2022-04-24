@@ -91,3 +91,22 @@ hh run scripts/2.ts --network rinkeby
 ### Take Away
 
 Seems like such a silly mistake but one that can have huge consequences! That is why a constructor function is now named with the keyword `constructor`
+
+
+## Level 3 Coin Flip
+
+We will need a smart contract of our own to first. This will have to have a function which mirrors the coin flip calculation and when a desired results shows up, call the coin flip contract's actual funtion.
+
+Each flip must be done in a different blockhash as per the `if` check. Therefore, I do not think this can be done is one transaction
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/3.ts --network rinkeby
+```
+
+[My Solution](https://rinkeby.etherscan.io/address/0x7a76fd12dc7d6fb5880fecbcfe37020ab0b86414#code)
+
+
+### Take Away 
+
+Generating random numbers in solidity is not really possible, unless you use an oracle like [Chainlink VRF](https://docs.chain.link/docs/get-a-random-number)
