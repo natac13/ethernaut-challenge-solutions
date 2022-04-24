@@ -70,3 +70,24 @@ A contract can receive ether with a special function `receive`.
 > A contract cannot react to such Ether transfers and thus also cannot reject them. This is a design choice of the EVM and Solidity cannot work around it.
 
 > It also means that address(this).balance can be higher than the sum of some manual accounting implemented in a contract (i.e. having a counter updated in the receive Ether function).
+
+
+## Level 2 Fallout / Fal1out
+
+This is a little tricky to see. However the constructor is not named the same as the contract and is therefore not actually a constuctor which is called upon creation, but a normal public function which can be called by anyone
+
+
+### Solution
+
+No contract needed for this solution. 
+There is a test which will run the actions required to take control of the contract. As well as a script to do so against the instance you create.
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/2.ts --network rinkeby
+```
+
+
+### Take Away
+
+Seems like such a silly mistake but one that can have huge consequences! That is why a constructor function is now named with the keyword `constructor`
