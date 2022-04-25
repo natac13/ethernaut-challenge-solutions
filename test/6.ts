@@ -24,4 +24,37 @@ describe("Delegation", function () {
 
     expect(await contract.owner()).to.equal(me.address);
   });
+
+  it("Contract Version", async function () {
+    const [owner, me, other] = await ethers.getSigners();
+    const Delegate = await ethers.getContractFactory("TestDelegateCall");
+    const delegate = await Delegate.deploy();
+    await delegate.deployed();
+
+    const Contract = await ethers.getContractFactory("DelegateCall");
+    const contract = await Contract.deploy();
+    await contract.deployed();
+
+    expect(await delegate.sender()).to.equal(ethers.constants.AddressZero);
+    expect(await delegate.num()).to.equal(0);
+    expect(await delegate.value()).to.equal(0);
+    expect(await contract.sender()).to.equal(ethers.constants.AddressZero);
+    expect(await contract.num()).to.equal(0);
+    expect(await contract.value()).to.equal(0);
+
+    await contract
+      .connect(me)
+      .setVars(delegate.address, ethers.BigNumber.from("1313"), {
+        value: ethers.utils.parseUnits("1", "gwei"),
+      });
+
+    expect(await contract.sender()).to.equal(me.address);
+    expect(await contract.num()).to.equal(ethers.BigNumber.from("1313"));
+    expect(await contract.value()).to.equal(
+      ethers.utils.parseUnits("1", "gwei")
+    );
+    expect(await delegate.sender()).to.equal(ethers.constants.AddressZero);
+    expect(await delegate.num()).to.equal(0);
+    expect(await delegate.value()).to.equal(0);
+  });
 });
