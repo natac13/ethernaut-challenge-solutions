@@ -149,3 +149,20 @@ Run and then submit the instance on the ethernaut website
 ```sh
 hh run scripts/5.ts --network rinkeby
 ```
+
+## Level 6 Delegation
+
+This will help show the implications of using delegatecall
+
+### Solution
+
+When `delegatecall` is used, the callling contract's variables, ETH and context are used by the called contract instead of it's own state / context.
+
+Therefore since there is a `delegatecall` in the target contract's `fallback` function we can encode the `pwd()` function call in the `data` which will then set the `owner` of `Delegation` to `msg.sender`. 
+
+If `call` was used the `Delegate` contract's owner would be updated instead
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/6.ts --network rinkeby
+```
