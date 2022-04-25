@@ -166,3 +166,18 @@ Run and then submit the instance on the ethernaut website
 ```sh
 hh run scripts/6.ts --network rinkeby
 ```
+
+
+## Level 7 Force
+
+This is a completely empty contract that we need to somehow send ETH to. See level 1 for tips!
+
+### Solution
+
+A contract can only receive ETH with the `receive` or `fallback` function. UNLESS it is set as the miner rewars address or a `selfdestrut` address. These types of transfer are not stoppable by any contract. This was a EVM design choice.
+
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/7.ts --network rinkeby
+```
