@@ -136,3 +136,16 @@ hh run scripts/4.ts --network rinkeby
 
 This technique was used to mint more than the expected number of Adidas NFTs when it launched.
 A smart contract was created which made child smart contract which minted the max and transfer to the parent before self destructing.
+
+## Level 5 Token
+
+Prior to version 0.8.0 of solidity you would have to use SafeMath.sol from Open Zeppelin to guard against overflow and underflow.
+
+### Solution
+
+Because this contract is compiled with 0.6.0 and does not use SafeMath.sol we can simply request to transfer more than our actual amount of tokens, pass the `require` check and be left with a wack ton of tokens!! 💰
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/5.ts --network rinkeby
+```

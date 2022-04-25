@@ -27,7 +27,22 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.10",
+  // solidity: "0.8.10",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.10",
+        settings: {},
+      },
+      { version: "0.6.0", settings: {} },
+    ],
+    overrides: {
+      "contracts/5/Token.sol": {
+        version: "0.6.0",
+        settings: {},
+      },
+    },
+  },
   networks: {
     rinkeby: {
       url: ALCHEMY_API_KEY_URL,
