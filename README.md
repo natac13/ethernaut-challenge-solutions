@@ -181,3 +181,36 @@ Run and then submit the instance on the ethernaut website
 ```sh
 hh run scripts/7.ts --network rinkeby
 ```
+
+
+## Level 8 Vault
+
+Trying to show that there is nothing that is really private in solidity. Private only refers to the scope which the function / variable can be used in. Private being just the given contract.
+
+### Solution
+
+Therefore we simply need to read the password which is stored at location `1` and unlock the contract.
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/8.ts --network rinkeby
+```
+
+## Level 9 King
+
+A way to show that as a developer we need to be aware that the address which is on the receiving end of a 'transfer' can be a contract and therefore act differently than a simply wallet address
+
+### Solution
+
+Claim ownership of the contract using another smart contract which throws and error in it's receive function
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/9.ts --network rinkeby
+```
+
+
+### Take Away 
+
+Always know that the receiving address can be a smart contract!
+Usually better to transfer *after* setting state variables. (most of the time)
