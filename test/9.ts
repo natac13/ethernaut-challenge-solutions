@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Vault", function () {
+describe("King", function () {
   it("Happy path", async function () {
     const [owner, me, other] = await ethers.getSigners();
     const Contract = await ethers.getContractFactory("King");
