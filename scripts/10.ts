@@ -52,7 +52,7 @@ async function main() {
     gasLimit: ethers.BigNumber.from(900000),
   });
 
-  setTimeout(() => {
+  setTimeout(async () => {
     console.log(
       "Ending balance: ",
       await ethers.provider.getBalance(contract.address)
