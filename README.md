@@ -214,3 +214,26 @@ hh run scripts/9.ts --network rinkeby
 
 Always know that the receiving address can be a smart contract!
 Usually better to transfer *after* setting state variables. (most of the time)
+
+
+## Level 10 Reentrance
+
+This is what happened to the now famous DAO exploit which then caused the Ethereum split.
+
+Looking at the target contract's `withdraw` function, we can see that the `msg.sender`'s balance is only updated *after* the transfer. 
+
+### Solution
+
+Therefore we can use a smart contract that will call back into the target contract's `withdraw` function until the entire contract is empty.
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/9.ts --network rinkeby
+```
+
+[Image of internal transactions]["./images/reentrance-attack-view.png"]
+
+### Take Away
+
+Update state variables before any transfers. Or revert the ReentrancyGuard contract from Open Zeppelin / one like it to prevent the reentrance of a function until it has run to completion
+
