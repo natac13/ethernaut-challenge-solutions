@@ -231,7 +231,7 @@ Run and then submit the instance on the ethernaut website
 hh run scripts/9.ts --network rinkeby
 ```
 
-[Image of internal transactions]["./images/reentrance-attack-view.png"]
+![Image of internal transactions]( "./images/reentrance-attack-view.png", "Image of internal transactions" )
 
 ### Take Away
 
