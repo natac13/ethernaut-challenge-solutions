@@ -231,9 +231,26 @@ Run and then submit the instance on the ethernaut website
 hh run scripts/9.ts --network rinkeby
 ```
 
+[Solution Contract](https://rinkeby.etherscan.io/address/0xf676cb1a5276a82419feb9df16972492d11098a1)
 ![Image of internal transactions](/images/reentrance-attack-view.png)
 
 ### Take Away
 
 Update state variables before any transfers. Or revert the ReentrancyGuard contract from Open Zeppelin / one like it to prevent the reentrance of a function until it has run to completion
 
+
+## Level 11 Elevator
+
+Need to reach to top floor;
+
+## Solution
+
+Looking at the way the `goTo` function in the `Elevator` contract is setup, we simply need to have a function names `isLastFloor` which will return `false` the first time then `true` the second
+
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/9.ts --network rinkeby
+```
+
+[BadBuilding Contract](https://rinkeby.etherscan.io/address/0x1ea3fc975f4720e166c5504fe5ca6f3b945ad765#code)
