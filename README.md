@@ -250,7 +250,26 @@ Looking at the way the `goTo` function in the `Elevator` contract is setup, we s
 
 Run and then submit the instance on the ethernaut website
 ```sh
-hh run scripts/9.ts --network rinkeby
+hh run scripts/11.ts --network rinkeby
 ```
 
 [BadBuilding Contract](https://rinkeby.etherscan.io/address/0x1ea3fc975f4720e166c5504fe5ca6f3b945ad765#code)
+
+
+## Level 12 Privacy
+
+Another attempt at hiding a secret key in the contract to stress the point home that there is nothing secret on the blockchain. 
+
+I have even shown in the testing and the run script how to read the other variables that are packed together.
+
+uint8 / uint256 * 66
+
+where 66 is the length of the padded hex value of those variables.
+
+### Solution
+
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/12.ts --network rinkeby
+```
