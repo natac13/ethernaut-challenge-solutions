@@ -273,3 +273,21 @@ Run and then submit the instance on the ethernaut website
 ```sh
 hh run scripts/12.ts --network rinkeby
 ```
+
+
+## Level 15 NaughtCoin
+
+Goal is to lose all the coins long before the lock period is over
+
+### Solution
+
+As the NaughtCoin uses the ERC20 contract, we can approve another address to call `transferFrom` and move the tokens from our wallet.
+
+I have made a contract to make the `transferFrom` call
+
+[Solution Contract](https://rinkeby.etherscan.io/address/0x6e7f85bfb4fbbf4d50485fce91cfffb5cdfd521c)
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/15.ts --network rinkeby
+```
