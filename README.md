@@ -286,6 +286,9 @@ Need to break throught 3 gates with different requiements.
 2. brute force by using a for loop to find the right amount of gas to send. 
 3. see comments in solution contract see how the `bytes8` data was figured out
 
+
+[Solution contract](https://rinkeby.etherscan.io/address/0x45cfca3c118e9fc526d269f864b07ca53a79d732)
+
 Run and then submit the instance on the ethernaut website
 ```sh
 hh run scripts/13.ts --network rinkeby
