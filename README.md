@@ -274,6 +274,23 @@ Run and then submit the instance on the ethernaut website
 hh run scripts/12.ts --network rinkeby
 ```
 
+## Level 13 GatekeeperOne
+
+Need to break throught 3 gates with different requiements.
+1. same as Telephone challenge, need to use a smart contract so `tx.origin` != `msg.sender`
+2. `gasleft()` to be moduloed by 8191. 
+3. Various data requirements by comparing the `bytes8` data after different casting.
+
+### Solution
+1. Smart contract
+2. brute force by using a for loop to find the right amount of gas to send. 
+3. see comments in solution contract see how the `bytes8` data was figured out
+
+Run and then submit the instance on the ethernaut website
+```sh
+hh run scripts/13.ts --network rinkeby
+```
+
 
 ## Level 15 NaughtCoin
 

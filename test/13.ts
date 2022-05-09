@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 
 describe("GatekeeperOne", function () {
-  it.skip("Happy path", async function () {
+  it("Happy path", async function () {
     const [owner, me, other] = await ethers.getSigners();
     const Contract = await ethers.getContractFactory("GatekeeperOne");
     const contract = await Contract.deploy();
