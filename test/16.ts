@@ -24,7 +24,10 @@ describe("Perservation", function () {
     await attackLibrary.deployed();
 
     const Solution = await ethers.getContractFactory("Level16Solution");
-    const solution = await Solution.connect(me).deploy(contract.address);
+    const solution = await Solution.connect(me).deploy(
+      contract.address,
+      attackLibrary.address
+    );
     await solution.deployed();
 
     expect(await contract.owner()).to.equal(owner.address);

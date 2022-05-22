@@ -23,9 +23,18 @@ async function main() {
 
   await contract.deployed();
 
+  const AttackLibrary = await ethers.getContractFactory(
+    "AttackLibraryContract"
+  );
+  const attackLibrary = await AttackLibrary.deploy();
+  await attackLibrary.deployed();
+
   // with contract - does not pass level though as the new owner address is different
   const Solution = await ethers.getContractFactory("Level16Solution");
-  const solution = await Solution.deploy(contract.address);
+  const solution = await Solution.deploy(
+    contract.address,
+    attackLibrary.address
+  );
   await solution.deployed();
 
   console.log("Owner before: ", await contract.owner());
